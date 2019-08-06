@@ -20,11 +20,8 @@ class Explorer {
     }
 
     private function URLToPath() {
-        var_dump($_SERVER['REQUEST_URI']);
         $this->_url = explode('/', $_SERVER['REQUEST_URI']);
-        var_dump($this->_url);
         array_splice($this->_url, 0, 2);
         $this->_path = '../' . implode('/', $this->_url);
-        var_dump($this->_path);
     }
 }
