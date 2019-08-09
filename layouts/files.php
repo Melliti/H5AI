@@ -16,11 +16,13 @@ class Files {
     }
 
     // Show file details
-    private function displayFileInfo($url) {
+    private function displayFileInfo($url, $path) {
         echo "<p><img src=\"{$this->fileInfo["icon"]}\" alt=\"language icon\"/>";
         echo "<a href=\"{$url}\"> {$this->fileInfo["filename"]}</a></p>";
-        echo date('d/m/y', $this->fileInfo["mtime"]) . " - ";
-        echo number_format($this->fileInfo["size"] / 1024, 2) . ' KB';
+        if (!is_dir($path)){
+            echo "<p>" . date('d/m/y', $this->fileInfo["mtime"]) . " - ";
+            echo number_format($this->fileInfo["size"] / 1024, 2) . "KB<p>";
+        }
     }
 
     // Get data about the file
@@ -58,7 +60,7 @@ class Files {
             if ($handle != "." && $handle != "..")
             {
                 $this->defineIcon($handle, $path);
-                $this->displayFileInfo($url);
+                $this->displayFileInfo($url, $fullPath);
             }  
         }
     }
