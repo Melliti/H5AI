@@ -5,6 +5,16 @@ class Files {
     private $imgTypes = ['jpg', 'png', 'gif', 'bmp', 'svg'];
     private $fileInfo= [];
 
+    public function showFileContent($file) {
+        $res = fopen($file,"r");
+        echo "<br>";
+        while(!feof($res))  {
+            $result = fgets($res);
+            echo $result . "<br>";
+        }
+        fclose($res);
+    }
+
     // Show file details
     private function displayFileInfo($url) {
         echo "<p><img src=\"{$this->fileInfo["icon"]}\" alt=\"language icon\"/>";

@@ -3,11 +3,13 @@
 class Explorer {
     private $_url;
     private $_path;
-    private $_res;
+    private $_res = null;
+    // private $_fileContent = null;
 
     public function getURL() { return $this->_url; }
     public function getPath() { return $this->_path; }
     public function getResource() { return $this->_res; }
+    // public function getFileContent() { return $this->_fileContent; }
 
     public function __construct() {
         $this->init();
@@ -15,8 +17,10 @@ class Explorer {
 
     public function init() {
         $this->URLToPath();
-        $this->_res = opendir($this->_path);
-        // return $this->res;
+        if (is_dir($this->_path))
+            $this->_res = opendir($this->_path);
+        else
+            return $this->_path;
     }
 
     private function URLToPath() {
